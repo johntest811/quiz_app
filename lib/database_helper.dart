@@ -1,3 +1,4 @@
+// File: lib/database/database_helper.dart
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:crypto/crypto.dart';
@@ -51,17 +52,113 @@ class DatabaseHelper {
       )
     ''');
 
-    // Insert sample questions
-    await db.insert('questions', {
-      'question': 'What is the capital of France?',
-      'options': jsonEncode(['Paris', 'London', 'Berlin', 'Madrid']),
-      'correctAnswer': 0
-    });
-    await db.insert('questions', {
-      'question': 'Which planet is known as the Red Planet?',
-      'options': jsonEncode(['Jupiter', 'Mars', 'Venus', 'Mercury']),
-      'correctAnswer': 1
-    });
+    // Insert 20 sample questions
+    final questions = [
+      {
+        'question': 'What is the capital of France?',
+        'options': jsonEncode(['Paris', 'London', 'Berlin', 'Madrid']),
+        'correctAnswer': 0
+      },
+      {
+        'question': 'Which planet is known as the Red Planet?',
+        'options': jsonEncode(['Jupiter', 'Mars', 'Venus', 'Mercury']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is 2 + 2?',
+        'options': jsonEncode(['3', '4', '5', '6']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'Who wrote "Romeo and Juliet"?',
+        'options': jsonEncode(['Shakespeare', 'Dickens', 'Austen', 'Hemingway']),
+        'correctAnswer': 0
+      },
+      {
+        'question': 'What is the largest mammal?',
+        'options': jsonEncode(['Elephant', 'Blue Whale', 'Giraffe', 'Hippopotamus']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'Which element has the symbol H?',
+        'options': jsonEncode(['Helium', 'Hydrogen', 'Hafnium', 'Holmium']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the currency of Japan?',
+        'options': jsonEncode(['Yuan', 'Yen', 'Won', 'Ringgit']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'Which country hosted the 2016 Olympics?',
+        'options': jsonEncode(['China', 'Brazil', 'Russia', 'Japan']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the boiling point of water in Celsius?',
+        'options': jsonEncode(['50', '75', '100', '125']),
+        'correctAnswer': 2
+      },
+      {
+        'question': 'Who painted the Mona Lisa?',
+        'options': jsonEncode(['Van Gogh', 'Da Vinci', 'Picasso', 'Monet']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the longest river in the world?',
+        'options': jsonEncode(['Amazon', 'Nile', 'Yangtze', 'Mississippi']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'Which gas is most abundant in Earth’s atmosphere?',
+        'options': jsonEncode(['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Argon']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the capital of Australia?',
+        'options': jsonEncode(['Sydney', 'Melbourne', 'Canberra', 'Perth']),
+        'correctAnswer': 2
+      },
+      {
+        'question': 'Which scientist developed the theory of relativity?',
+        'options': jsonEncode(['Newton', 'Einstein', 'Galileo', 'Hawking']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the smallest unit of life?',
+        'options': jsonEncode(['Atom', 'Molecule', 'Cell', 'Organ']),
+        'correctAnswer': 2
+      },
+      {
+        'question': 'Which continent is the Sahara Desert located on?',
+        'options': jsonEncode(['Asia', 'Africa', 'Australia', 'South America']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the chemical formula for water?',
+        'options': jsonEncode(['CO2', 'H2O', 'NaCl', 'O2']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'Which language is primarily spoken in Brazil?',
+        'options': jsonEncode(['Spanish', 'Portuguese', 'English', 'French']),
+        'correctAnswer': 1
+      },
+      {
+        'question': 'What is the tallest mountain in the world?',
+        'options': jsonEncode(['K2', 'Kangchenjunga', 'Everest', 'Lhotse']),
+        'correctAnswer': 2
+      },
+      {
+        'question': 'Which organ is responsible for pumping blood?',
+        'options': jsonEncode(['Liver', 'Heart', 'Lung', 'Kidney']),
+        'correctAnswer': 1
+      },
+    ];
+
+    for (var question in questions) {
+      await db.insert('questions', question);
+    }
   }
 
   Future<bool> registerUser(String username, String password) async {
