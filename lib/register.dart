@@ -58,14 +58,14 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 30),
               const Text(
-                'Email Address',
+                'Please Enter your Username',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  hintText: 'hello@example.com',
+                  hintText: 'Add you Username',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(color: Colors.grey.shade300),

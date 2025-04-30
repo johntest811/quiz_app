@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     } else {
       setState(() {
-        _errorMessage = 'Invalid email or password';
+        _errorMessage = 'Invalid Username or password';
       });
     }
   }
@@ -59,14 +59,14 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 30),
               const Text(
-                'Email Address',
+                'User Name',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  hintText: 'hello@example.com',
+                  hintText: 'Please Enter your Username',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(color: Colors.grey.shade300),
@@ -117,20 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      // Add forgot password functionality here
-                    },
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
+
               Row(
                 children: [
                   Checkbox(
