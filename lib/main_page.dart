@@ -16,7 +16,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List<Map<String, dynamic>> quizzes = [];
   bool isLoading = true;
-  final List<String> categories = ['Popular', 'Science', 'Mathematics', 'Computer'];
+  final List<String> categories = ['Popular', 'Newest'];
 
   @override
   void initState() {
@@ -39,6 +39,22 @@ class _MainPageState extends State<MainPage> {
       context,
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
+  }
+
+  // Helper function to determine the icon based on quiz name
+  IconData _getIconForQuiz(String quizName) {
+    final name = quizName.toLowerCase();
+    if (name.contains('general')) {
+      return Icons.lightbulb;
+    } else if (name.contains('history')) {
+      return Icons.book;
+    } else if (name.contains('programming')) {
+      return Icons.code;
+    } else if (name.contains('science')) {
+      return Icons.science;
+    } else {
+      return Icons.quiz;
+    }
   }
 
   @override
@@ -89,7 +105,8 @@ class _MainPageState extends State<MainPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Chip(
                       label: Text(categories[index]),
-                      backgroundColor: index == 0 ? Colors.blue[100] : Colors.white,
+                      backgroundColor:
+                      index == 0 ? Colors.blue[100] : Colors.white,
                       labelStyle: TextStyle(
                         color: index == 0 ? Colors.blue : Colors.black,
                       ),
@@ -106,10 +123,26 @@ class _MainPageState extends State<MainPage> {
                   final quiz = quizzes[index];
                   return Card(
                     child: ListTile(
-                      leading: Container(
-                        width: 60,
-                        height: 60,
-                        color: Colors.grey[300], // Placeholder for image
+                      leading: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.blue[200]!, Colors.blue[400]!],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              _getIconForQuiz(quiz['name']),
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                        ),
                       ),
                       title: Text(quiz['name']),
                       subtitle: const Text('1 hour 15 min'),
@@ -143,7 +176,8 @@ class _MainPageState extends State<MainPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QuizResultsPage(userId: widget.userId),
+                      builder: (context) =>
+                          QuizResultsPage(userId: widget.userId),
                     ),
                   );
                 },
